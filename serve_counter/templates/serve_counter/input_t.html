@@ -73,9 +73,9 @@
             <td class="text-center">{{ item.2 }}</td>
             <td class="text-center">{{ item.3 }}</td>
             <td class="text-center">{{ item.4 }}</td>
-            <td class="text-center">{{ item.5|floatformat:1 }}%</td>
-            <td class="text-center">({{ item.6|floatformat:1 }}%)</td>
-            <td class="text-end">
+            <td class="text-center">{{ item.5|floatformat:0 }}%</td>
+            <td class="text-center">({{ item.6|floatformat:0 }}%)</td>
+            <td class="text-end" width="70">
                 <a href="{% url 'input_p' game.id item.0 %}">
                     <input type="submit" value="入力" class="btn btn-primary">
                 </a> 
