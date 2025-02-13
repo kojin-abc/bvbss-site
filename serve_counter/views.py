@@ -42,23 +42,22 @@ def logoutv(request):
 def select(request):
     # logout(request)
     
-    players = Player.objects.all()
-    if len(players) == 0:
-        p_datas=[
-            {'id':1, 'name':"ひた", 'grade':6 },
-            {'id':2, 'name':"こち", 'grade':6 },
-            {'id':3, 'name':"みる", 'grade':6 },
-            {'id':4, 'name':"あい", 'grade':6 },
-            {'id':5, 'name':"した", 'grade':3 },
-            {'id':6, 'name':"ひこ", 'grade':3 },
-            {'id':7, 'name':"ゆこ", 'grade':3 },
-            {'id':8, 'name':"ぜじ", 'grade':3 },
-            {'id':9, 'name':"ゆの", 'grade':3 },
-            {'id':10, 'name':"いは", 'grade':3 },
-        ]
-        for p in p_datas:
-            player = Player(p)
-            player.save()
+    #players = Player.objects.all()
+    #if len(players) == 0:
+    #    p_datas=[
+    #        {'id':1, 'name':"ひた", 'grade':6 },
+    #        {'id':2, 'name':"こち", 'grade':6 },
+    #        {'id':3, 'name':"みる", 'grade':6 },
+    #        {'id':4, 'name':"あい", 'grade':6 },
+    #        {'id':5, 'name':"した", 'grade':3 },
+    #        {'id':6, 'name':"ひこ", 'grade':3 },
+    #        {'id':7, 'name':"ゆこ", 'grade':3 },
+    #        {'id':8, 'name':"ぜじ", 'grade':3 },
+    #        {'id':9, 'name':"ゆの", 'grade':3 },
+    #        {'id':10, 'name':"いは", 'grade':3 },
+    #    ]
+    #    for p in p_datas:
+    #        Player.objects.create(id=p['id'], name=p['name'], grade=p['garade'])
     
     return render(request, 'serve_counter/select.html')
 
