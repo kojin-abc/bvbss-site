@@ -65,7 +65,7 @@
         </tr>
     {% for ps in ps_data %}
         <tr class="text-center">
-            <th>{{ ps.1 }}</th><td>{{ ps.2 }}</td><td>{{ ps.3 }}</td><td>{{ ps.4 }}</td><td>{{ ps.5|floatformat:1 }}%</td><td>({{ ps.6|floatformat:1 }}%)</td>
+            <th>{{ ps.1 }}</th><td>{{ ps.2 }}</td><td>{{ ps.3 }}</td><td>{{ ps.4 }}</td><td>{{ ps.5|floatformat:0 }}%</td><td>({{ ps.6|floatformat:0 }}%)</td>
         </tr>
     {% endfor %}
     </table>
