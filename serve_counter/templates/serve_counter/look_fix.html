@@ -1,0 +1,109 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <h1 class="display-4 text-primary">
+                修正
+            </h1>
+        </td>
+        <td class="text-end">
+            <form action="{% url 'look_fix' gstrs.0 gstrs.1 gnum %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="この試合を削除" class="btn btn-danger" name="submit-delete">
+            </form> 
+        </td>
+        <td class="text-end" width="80">
+            <a href="{% url 'look_detail' gstrs.0 gstrs.1 gnum %}">
+                <input type="submit" value="キャンセル" class="btn btn-outline-primary">
+            </a>
+        </td>
+    </tr>
+</table>
+<form action="{% url 'look_fix' gstrs.0 gstrs.1 gnum %}" method="post">
+    {% csrf_token %}
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <h2>{{ datestr}}</h2>
+        </td>
+        <td>
+            <h2>{{ opponent }}</h2>
+        </td>
+        <td class="text-end">
+                <input type="submit" value="保存して戻る" class="btn btn-primary"  name="save_and_back">
+        </td>
+    </tr>
+</table>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+    <div class= "alert alert-primary alert-dismissible fade show">
+        {% for m in messages %}
+        <p>{{ m }}</p>
+        {% endfor %}
+        <input type="submit" value="削除" class="btn btn-danger" name="submit-deldone">
+        <input type="submit" value="キャンセル" class="btn btn-outline-primary" name="submit-cancel">
+        
+    </div>
+{% endif %}
+    <div class="border border-primary">
+        <table class="table table-borderless">
+            {% csrf_token %}
+            <tr class="table-primary text-center">
+                <th><h4>びわ</h4></th><td>{{ score_form.score0_0 }}</td><td> - </td><td>{{score_form.score0_1}}</td><th><h4>{{ game.opponent }}</h4></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット1</td><td>{{ score_form.score1_0 }}</td><td> - </td><td>{{score_form.score1_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット2</td><td>{{ score_form.score2_0 }}</td><td> - </td><td>{{score_form.score2_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット3</td><td>{{ score_form.score3_0 }}</td><td> - </td><td>{{score_form.score3_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット4</td><td>{{ score_form.score4_0 }}</td><td> - </td><td>{{score_form.score4_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット5</td><td>{{ score_form.score5_0 }}</td><td> - </td><td>{{score_form.score5_1}}</td><th></th>
+            </tr>
+        </table>
+    </div>
+    <table class="table">
+        <tr class="table-primary text-center">
+            <th>選手</th><th>エース</th><th>ノーリタ</th><th>リターン</th><th>ネット</th><th>アウト</th><th>その他</th>
+        </tr>
+    {% for ps in serve_form %}
+        <tr>
+            <th>{{ ps.serve_label }}</th>
+            <td>
+                <input type="number" value="{{ ps.serve_0.s_value }}" name="{{ ps.serve_0.s_key }}" class="form-control" style="text-align: center;" max="99" min="0"> 
+            </td>
+            <td>
+                <input type="number" value="{{ ps.serve_1.s_value }}" name="{{ ps.serve_1.s_key }}" class="form-control" style="text-align: center;" max="99" min="0"> 
+            </td>
+            <td>
+                <input type="number" value="{{ ps.serve_2.s_value }}" name="{{ ps.serve_2.s_key }}" class="form-control" style="text-align: center;" max="99" min="0"> 
+            </td>
+            <td>
+                <input type="number" value="{{ ps.serve_3.s_value }}" name="{{ ps.serve_3.s_key }}" class="form-control" style="text-align: center;" max="99" min="0"> 
+            </td>
+            <td>
+                <input type="number" value="{{ ps.serve_4.s_value }}" name="{{ ps.serve_4.s_key }}" class="form-control" style="text-align: center;" max="99" min="0"> 
+            </td>
+            <td>
+                <input type="number" value="{{ ps.serve_5.s_value }}" name="{{ ps.serve_5.s_key }}" class="form-control" style="text-align: center;" max="99" min="0"> 
+            </td>
+
+            <!-- td>{{ ps.serve_1 }}</td>
+            <td>{{ ps.serve_2 }}</td>
+            <td>{{ ps.serve_3 }}</td>
+            <td>{{ ps.serve_4 }}</td>
+            <td>{{ ps.serve_5 }}</td -->
+        </tr>
+    {% endfor %}
+    </table>
+</form>
+{% endblock %}

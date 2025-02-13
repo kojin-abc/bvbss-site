@@ -1,0 +1,15 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+    <h1 class="display-4 text-primary">サーブカウンター</h1>
+    <h2> びわバレーボールスポーツ少年団 </h2>
+{% endblock %}
+{% block content%}
+    <p> ユーザー名とパスワードを入力してください。</p>
+    <p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="ログイン" class="btn btn-primary">
+        </form>
+    </p>
+{% endblock %}

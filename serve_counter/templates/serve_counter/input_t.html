@@ -1,0 +1,96 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+    <table class="table table-borderless">
+        <tr>
+            <td><h1 class="display-4 text-primary">サーブ入力</h1></td>
+            <td class="text-end">
+                <form action="{% url 'input_t' game.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="中断して戻る" class="btn btn-outline-primary" name="submit-Back">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td><h2 >{{ game.datestr }}</h2></td>
+            <td class="text-end">
+                <form action="{% url 'input_t' game.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="試合結果の入力" class="btn btn-secondary" name="submit-Input">
+                </form>
+            </td>
+        </tr>
+    </table>  
+{% endblock %}
+{% block content%}
+    <div class="border border-primary">
+    <table class ="table table-borderless">
+        <tr class="table-primary text-center">
+            <th><h2>びわ</h2></th>
+            <th><h2>{{ score }}</h2></th>
+            <th><h2>{{ game.opponent }}</h2></th></tr>
+        </tr>
+        {% for s in scores %}
+        <tr  class="text-center">
+            <td>　セット{{ forloop.counter }}</td><td>{{ s }}</td><td></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    <table class="table table-borderless">
+        <tr class="text-end">
+            <td>
+                <form action="{% url 'input_t' game.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="入力をひとつ戻す" class="btn btn-outline-secondary" name="submit-Undo">
+                </form>
+            </td>
+        </tr>
+    </table>
+    {% if messages %}
+        <div class= "alert alert-primary alert-dismissible fade show">
+            {% for m in messages %}
+            
+                <p>{{ m }}</p>
+                <a href="{% url 'input_t' game.id %}">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <table class="table table-striped">
+        <tr  class="table-primary">
+            <th>選手</th>
+            <th class="text-center">成功</th>
+            <th class="text-center">失敗</th>
+            <th class="text-center">合計</th>
+            <th class="text-center">成功率</th>
+            <th class="text-center">(得点率)</th>
+            <th class="text-center">入力</th>
+        </tr>
+    {% for item in players %}
+        <tr>
+            <th>{{ item.1 }}</th>
+            <td class="text-center">{{ item.2 }}</td>
+            <td class="text-center">{{ item.3 }}</td>
+            <td class="text-center">{{ item.4 }}</td>
+            <td class="text-center">{{ item.5|floatformat:1 }}%</td>
+            <td class="text-center">({{ item.6|floatformat:1 }}%)</td>
+            <td class="text-end">
+                <a href="{% url 'input_p' game.id item.0 %}">
+                    <input type="submit" value="入力" class="btn btn-primary">
+                </a> 
+            </td>
+        </tr>    
+    {% endfor %}
+        <tr>
+            <th></th><td></td><td></td><td></td><td></td>
+            <td colspan="3" class="text-end">
+                <form action="{% url 'input_t' game.id %}" method="post">
+                    {% csrf_token %} 
+                    <input type="submit" value="確定して試合終了" class="btn btn-primary" name="submit-End">
+                </form>
+            </td>
+        </tr>
+    </table>
+    
+{% endblock %}

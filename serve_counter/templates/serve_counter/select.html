@@ -1,0 +1,31 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+    <h1 class="display-4 text-primary">サーブカウンター</h1>
+{% endblock %}
+{% block content %}
+    
+    <p> 操作を選んでください。 </p>
+    <table class="table table-borderless">
+        <tr>
+            <td>
+                <a href="{% url 'today' %}"><input type="submit" value="今日の試合の入力" class="btn btn-primary"></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="{% url 'look' %}"><input type="submit" value=" 閲覧・修正 " class="btn btn-primary"></a> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="{% url 'logoutv' %}"><input type="submit" value="ログアウト" class="btn btn-outline-primary"></a>
+            </td>
+        </tr>
+    </table>
+    <p>SNSにあげるときは、閲覧・修正の必要なページのフルスクリーンショットをアルバムなどに保存してご利用ください。</p>
+    <p>現在、報告している資料は次の2つです。</p>
+    <ul>
+        <li>試合結果 : [閲覧・修正]>[詳細]</li>
+        <li>サーブ集計 : [閲覧・修正]>[詳細]>全試合の[閲覧]</li>
+    </ul>
+{% endblock %}

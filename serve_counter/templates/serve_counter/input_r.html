@@ -1,0 +1,46 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+    <h1 class="display-4 text-primary">試合結果の入力</h1>
+{% endblock %}
+{% block content%}
+    <form action="{% url 'input_r' game.id %}" method="POST">
+        {% csrf_token %}
+        <table class="table table-borderless">
+            <tr>
+                <td><h2>{{ game.datestr }}  {{ game.opponent }}</h2></td>
+                <td class="text-end">
+                    <input type="submit" value="キャンセル" class="btn btn-outline-primary" name="submit_Back">
+                </td>
+            </tr>
+        </table>
+        
+        <table class="table table-borderless">
+            <tr class="table-primary text-center">
+                <th><h4>びわ</h4></th><td>{{ form.score0_0 }}</td><td> - </td><td>{{form.score0_1}}</td><th><h4>{{ game.opponent }}</h4></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット1</td><td>{{ form.score1_0 }}</td><td> - </td><td>{{form.score1_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット2</td><td>{{ form.score2_0 }}</td><td> - </td><td>{{form.score2_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット3</td><td>{{ form.score3_0 }}</td><td> - </td><td>{{form.score3_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット4</td><td>{{ form.score4_0 }}</td><td> - </td><td>{{form.score4_1}}</td><th></th>
+            </tr>
+            <tr class="text-center">
+                <td>　セット5</td><td>{{ form.score5_0 }}</td><td> - </td><td>{{form.score5_1}}</td><th></th>
+            </tr>
+        </table>
+        <table class="table table-borderless">
+            <tr>
+                <td  class="text-end">
+                    <input type="submit" value="保存して戻る" class="btn btn-primary" name="submit_Entry">
+                </td> 
+            </tr>
+        </table>
+    </form>
+
+{% endblock %}

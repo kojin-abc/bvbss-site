@@ -1,0 +1,80 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <h2>
+                びわバレーボールスポーツ少年団
+            </h2>
+        </td>
+        <td class="text-end">
+            {% if gnum == -2 or gnum == -3 %}
+                <a href="{% url 'look' %}">
+                    <input type="submit" value="戻る" class="btn btn-outline-primary">
+                </a>
+            {% else %}
+                <a href="{% url 'look_day' gstrs.0 %}">
+                    <input type="submit" value="戻る" class="btn btn-outline-primary">
+                </a>
+            {% endif %}    
+        </td>
+    </tr>
+</table>
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <h2>{{ datestr}}</h2>
+        </td>
+        <td>
+            <h2>{{ opponent }}</h2>
+        </td>
+    </tr>
+</table>
+{% endblock %}
+{% block content%}
+{% if gnum >= 0 %}
+<div class="border border-primary">
+    <table class ="table table-borderless">
+        <tr class="table-primary text-center">
+            <th><h2>びわ</h2></th>
+            <th><h2>{{ score }}</h2></th>
+            <th><h2>{{ opponent }}</h2></th></tr>
+        </tr>
+        {% for s in scores %}
+        <tr  class="text-center">
+            <td>　セット{{ forloop.counter }}</td><td>{{ s }}</td><td></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+    <table class="table table-borderless">
+        <tr class="align-middle">
+            <td>
+                <h1>
+                    詳細 
+                {% if gnum >= 0 %}
+                    <a href="{% url 'look_fix' gstrs.0 gstrs.1 gnum %}">
+                        <input type="submit" value="修正" class="btn btn-secondary">
+                    </a>
+                {% endif %}
+                </h1>
+            </td>
+            <td class="text-end">
+                <a href="{% url 'look_summary' gstrs.0 gstrs.1 gnum %}" style="text-decoration: none;">
+                    <h2>＜概要</h2>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr class="table-primary text-center">
+            <th>選手</th><th>エース</th><th>ノーリタ</th><th>リターン</th><th>ネット</th><th>アウト</th><th>その他</th>
+        </tr>
+    {% for ps in ps_data %}
+        <tr class="text-center">
+            <th>{{ ps.1 }} </th><td>{{ ps.2 }}</td><td>{{ ps.3 }}</td><td>{{ ps.4 }}</td><td>{{ ps.5 }}</td><td>{{ ps.6 }}</td><td>{{ ps.7 }}</td>
+        </tr>       
+    {% endfor %}
+    </table>
+{% endblock %}

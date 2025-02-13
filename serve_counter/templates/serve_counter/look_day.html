@@ -1,0 +1,46 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+    <table class="table table-borderless">
+        <tr>
+            <td>
+                <h2>
+                    びわバレーボールスポーツ少年団
+                </h2>
+            </td>
+            <td class="text-end">
+                <a href="{% url 'look' %}">
+                    <input type="submit" value="戻る" class="btn btn-outline-primary">
+                </a>
+            </td>
+        </tr>
+    </table>
+    
+{% endblock %}
+{% block content%}
+    <h2>{{ dstr }}</h2>
+    
+    <table class="table">
+        <tr class="text-center table-primary"></th><th>結果</th><th>対戦相手</th><th></th></tr>
+        <tr class="align-middle table-secondary">
+            <th class="text-center">{{ wlds.0 }} 勝 {{ wlds.1 }} 敗 {{ wlds.2 }} 分</th>
+            <th class="text-center">全試合</th>
+            <td class="text-end" width="80">
+                <a href="{% url 'look_summary' gstrs.0 gstrs.1 '-1' %}">
+                    <input type="submit" value="閲覧" class="btn btn-primary">
+                </a>
+            </td>
+        </tr>
+    {% for gd in g_data %}
+        <tr class="align-middle">
+            <td class="text-center">{{ gd.hoshi }}  {{ gd.score }}</td>
+            <td class="text-center">{{ gd.game.opponent }}</td>
+
+            <td class="text-end" width="80">
+                <a href="{% url 'look_summary' gstrs.0 gstrs.1 gd.game.id %}">
+                    <input type="submit" value="閲覧" class="btn btn-primary">
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

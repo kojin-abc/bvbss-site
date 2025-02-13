@@ -1,0 +1,61 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+    <table class="table table-borderless">
+        <tr>
+            <td>
+                <h1 class="display-4 text-primary">閲覧・修正</h1>
+            </td>
+            <td class="text-end" width="80">
+                <a href="{% url 'select' %}">
+                    <input type="submit" value="戻る" class="btn btn-outline-primary">
+                </a>
+            </td>
+        </tr>
+    </table>
+    
+{% endblock %}
+{% block content%}
+    <p>
+        「閲覧」を押すとサーブ集計を閲覧できます。
+        <ul>
+            <li>期間指定で試合を検索、サーブ集計を閲覧できます。</li>
+            <li>「詳細」を押すと試合結果を確認できます。</li>
+        </ul>
+    </p>
+    <table class="table table-borderless">
+        <form action="{% url 'look' %}" method="post">
+            {% csrf_token %}
+            <tr class="align-middle">
+                <td>期間指定 yyyy-mm-dd</td><td></td>
+                <td class="text-end" width="80"><input type="submit" value="検索" class="btn btn-secondary" name="submit-filter"></td>
+                <td class="text-end" width="80"><input type="submit" value="クリア" class="btn btn-secondary" name="submit-clear"></td>
+                <td class="text-end" width="80"><input type="submit" value="閲覧" class="btn btn-primary" name="submit-view"></td>
+            </tr>
+            <tr>
+                <td width="240">{{ form.from_date }}</td><td class="text-center"> ~ </td><td colspan="3">{{ form.to_date }}</td>
+            </tr>
+        </form>
+    </table>
+
+    <p>※指定期間内に選手名簿の変更があるときは正しく集計されません。</p>
+    <table class="table">
+            <tr class="table-primary">
+                <th>実施日 ({{ status }}表示中)</th><th class="text-center">試合数</th><th></th><th></th>
+            </tr>
+        {% for d in data %}
+            <tr class="align-middle">
+                <td>{{ d.datestr }}</td><td class="text-center">{{ d.game_num }}</td> <!-- 日付、試合数 -->
+                <td class="text-end" width="80">
+                    <a href="{% url 'look_day' d.getstr %}">
+                        <input type="submit" value="詳細" class="btn btn-secondary" name="submit-games">
+                    </a>
+                </td>
+                <td class="text-end" width="80">
+                    <a href="{% url 'look_summary' d.getstr d.getstr '-2' %}">
+                        <input type="submit" value="閲覧" class="btn btn-primary" name="submit-dayview">
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

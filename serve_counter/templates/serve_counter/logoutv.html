@@ -1,0 +1,11 @@
+{% extends 'serve_counter/base.html' %}
+{% block title %}
+    <h1 class="display-4 text-primary">ログアウト</h1>
+{% endblock %}
+{% block content%}
+    
+    <p> ログアウトしました。</p>
+    <p>
+        <a href="{% url 'index' %}">ログイン画面に戻る</a>
+    </p>
+{% endblock %}
