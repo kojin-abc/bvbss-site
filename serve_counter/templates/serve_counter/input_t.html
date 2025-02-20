@@ -64,7 +64,7 @@
             <th class="text-center">失敗</th>
             <th class="text-center">合計</th>
             <th class="text-center">成功率</th>
-            <th class="text-center">(得点率)</th>
+            <th class="text-center">得点率</th>
             <th class="text-center">入力</th>
         </tr>
     {% for item in players %}
@@ -73,8 +73,8 @@
             <td class="text-center">{{ item.2 }}</td>
             <td class="text-center">{{ item.3 }}</td>
             <td class="text-center">{{ item.4 }}</td>
-            <td class="text-center">{{ item.5|floatformat:0 }}%</td>
-            <td class="text-center">({{ item.6|floatformat:0 }}%)</td>
+            <td class="text-center">{{ item.5|floatformat:0 }}</td>
+            <td class="text-center">{{ item.6|floatformat:0 }}</td>
             <td class="text-end" width="70">
                 <a href="{% url 'input_p' game.id item.0 %}">
                     <input type="submit" value="入力" class="btn btn-primary">
@@ -83,8 +83,8 @@
         </tr>    
     {% endfor %}
         <tr>
-            <th></th><td></td><td></td><td></td><td></td>
-            <td colspan="3" class="text-end">
+            <th></th><td></td><td></td>
+            <td colspan="4" class="text-end">
                 <form action="{% url 'input_t' game.id %}" method="post">
                     {% csrf_token %} 
                     <input type="submit" value="確定して試合終了" class="btn btn-primary" name="submit-End">
